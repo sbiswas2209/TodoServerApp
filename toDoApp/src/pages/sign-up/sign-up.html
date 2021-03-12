@@ -1,0 +1,76 @@
+<!--
+  Generated template for the SignUpPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-row>
+      <ion-title *ngIf = "loginStatus == true">Login</ion-title>
+    <ion-title *ngIf = "loginStatus == false">Sign Up</ion-title>
+    <button ion-button end clear *ngIf = "loginStatus == true" (click) = "toggleView()">Sign Up</button>
+    <button ion-button end clear *ngIf = "loginStatus == false" (click) = "toggleView()">Log In</button>
+    </ion-row>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <form [formGroup] = credentialsSignUp *ngIf = "loginStatus == false">
+      <ion-item>
+        <ion-label floating>Email</ion-label>
+        <ion-input [formControl] = "credentialsSignUp.controls['email']" type = "email"></ion-input>
+      </ion-item>
+
+      <div *ngIf = "!credentialsSignUp.controls.email.valid && credentialsSignUp.controls.email.dirty" class="validator-error">Enter Valid Email</div>
+
+      <ion-item>
+        <ion-label floating>Phone Number</ion-label>
+        <ion-input [formControl] = "credentialsSignUp.controls['phone']" type = "number"></ion-input>
+      </ion-item>
+
+      <div *ngIf = "!credentialsSignUp.controls.phone.valid && credentialsSignUp.controls.phone.dirty" class="validator-error">Enter Valid Number</div>
+
+      <ion-item>
+        <ion-label floating>Username</ion-label>
+        <ion-input [formControl] = "credentialsSignUp.controls['userName']"></ion-input>
+      </ion-item>
+      
+      <div *ngIf = "!credentialsSignUp.controls.userName.valid && credentialsSignUp.controls.userName.dirty" class="validator-error">Only alphabets allowed</div>
+      
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input [formControl] = "credentialsSignUp.controls['password']" type = "password"></ion-input>
+      </ion-item>
+
+      <div *ngIf = "!credentialsSignUp.controls.password.valid && credentialsSignUp.controls.password.dirty" class="validator-error">Enter Valid Password. The password should be 8+ characters and contain 1 number, 1 alphabet and 1 special character</div>
+
+      <!-- <ion-row style="padding: 50px;"> -->
+      <ion-row style="padding-top: 50px;" *ngIf = "credentialsSignUp.controls.email.valid && credentialsSignUp.controls.email.dirty && credentialsSignUp.controls.phone.valid && credentialsSignUp.controls.phone.dirty && credentialsSignUp.controls.userName.valid && credentialsSignUp.controls.userName.dirty && credentialsSignUp.controls.password.valid && credentialsSignUp.controls.password.dirty">
+        <ion-col text-center>
+          <button ion-button round color="primary" (click)="signUp()">Sign Up</button>
+        </ion-col>
+      </ion-row>
+    </form>
+
+
+
+    <form [formGroup] = credentialsLogin *ngIf = "loginStatus == true">
+      
+      <ion-item>
+        <ion-label floating>User Name</ion-label>
+        <ion-input [formControl] = "credentialsLogin.controls['userName']" type = "text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input [formControl] = "credentialsLogin.controls['password']" type = "password"></ion-input>
+      </ion-item>
+
+      <ion-row style="padding: 50px;">
+        <ion-col text-center>
+          <button ion-button round color="primary" (click)="logIn()" *ngIf = "credentialsLogin.controls.password.dirty && credentialsLogin.controls.userName.dirty">Log In</button>
+        </ion-col>
+      </ion-row>
+    </form>
+</ion-content>
