@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-row>
+      <ion-title>
+        Let's get to work
+      </ion-title>
+      <ion-tab-button (click)="logOut()">
+        <ion-icon name="log-out-outline"></ion-icon>
+        <ion-label>Log Out</ion-label>
+      </ion-tab-button>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div id="container" *ngIf="tasks.length == 0">
+    <strong>Woohoo! No tasks left</strong>
+  </div>
+  <ion-list *ngIf="tasks.length != 0">
+    <ion-label *ngFor="let task of tasks">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <p style="margin-top: 5vh;">{{task.title}}</p>
+              <h2 style="margin-top: 5vh;">{{task.content}}</h2>
+              </ion-col>
+              <ion-col style="align-items: center;">
+                <ion-button (click)="deleteTask(task)">
+                  <ion-icon name="checkmark-done-outline"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+      </ion-label>
+      <hr>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" >
+    <ion-fab-button [routerLink]="['/new-task']">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
