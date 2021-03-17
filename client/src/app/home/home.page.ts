@@ -30,7 +30,7 @@ export class HomePage implements OnInit {
   ngOnInit(){
     this.storage.get('token').then((val) => {
       console.log(`ID : ${val}`);
-      this.http.post('http://localhost:5000/all', 
+      this.http.post('http://localhost:5000/tasks/all', 
         {
           id: val,
         }
@@ -45,7 +45,7 @@ export class HomePage implements OnInit {
     console.log()
     this.storage.get('token').then((val) => {
       console.log(`ID : ${val}`);
-      this.http.post('http://localhost:5000/deleteItem', 
+      this.http.post('http://localhost:5000/tasks/deleteItem', 
         {
           id: task.id,
           userId: val

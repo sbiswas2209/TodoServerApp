@@ -24,6 +24,7 @@ export class AuthPage implements OnInit {
   data: any;
   username: string;
   password: string;
+  email: string;
 
   constructor(
     private http: HttpClient,
@@ -47,7 +48,7 @@ export class AuthPage implements OnInit {
 
   async logIn() {
     await this.http
-      .post('http://localhost:5000/login', {
+      .post('http://localhost:5000/auth/login', {
         username: this.username,
         password: this.password,
       })
@@ -63,15 +64,16 @@ export class AuthPage implements OnInit {
 
   async signUp() {
     await this.http
-      .post('http://localhost:5000/signUp', {
+      .post('http://localhost:5000/auth/signUp', {
         username: this.username,
         password: this.password,
+        email: this.email
       })
       .subscribe(async (response: SignUpData) => {
         console.log(`${response}`);
         await this.storage.set('token', response.token).then(async (val) => {
           await this.presentToast(response.message);
-        this.router.navigate(['/home']);
+          this.router.navigate(['/home']);
         });
         
       });

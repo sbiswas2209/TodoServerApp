@@ -25,7 +25,7 @@ export class NewTaskPage implements OnInit {
 
   addItem(){
     this.storage.get('token').then((val) => {
-      this.http.post('http://localhost:5000/addItem',
+      this.http.post('http://localhost:5000/tasks/addItem',
         {
           title: this.title,
           content: this.content,
